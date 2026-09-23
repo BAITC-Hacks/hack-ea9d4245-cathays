@@ -328,3 +328,11 @@ Then sequence T055 → T056 → T057 → T058 → T059.
 - [ ] T102 Implement STT/TTS provider ports, completed-recording audio turn endpoint, recoverable voice error behavior, stage timings, browser microphone/transcript/playback controls, and voice tests in `backend/app/voice/`, `backend/app/api/audio_turns.py`, `apps/web/src/features/customer/CustomerConversation.tsx`, and associated tests per FR-029–FR-035/SC-010–SC-011 (missing).
 - [ ] T103 Add the supervisor evaluation result client/view with language/type metrics, errors, alternatives and confusion groups in `apps/web/src/api/evaluations.ts`, `apps/web/src/features/supervisor/EvaluationResults.tsx`, and `apps/web/src/features/supervisor/EvaluationResults.spec.tsx` per FR-039 and User Story 7 (missing).
 - [ ] T104 Run the full backend and web suite, quickstart flow, evaluator, dialogue/action/voice evidence collection, and record outstanding production telemetry/cost governance gates in `scripts/validate-quickstart.ps1` and `artifacts/validation/README.md` per SC-004–SC-020 and plan: milestones (missing).
+
+---
+
+## Phase 12: Convergence
+
+**Purpose**: Eliminate the split, non-terminal action state discovered after the execution-safety foundation was added.
+
+- [X] T105 CRITICAL Consolidate `ScenarioExecutor`, `MockActions`, and `ConfirmationMachine` into the customer-turn orchestrator so every declared irreversible action has one persisted preview ID, explicit confirmation turn, exactly-once terminal result, trace record, and customer response in `backend/app/execution/service.py`, `backend/app/execution/state_machine.py`, `backend/app/dialogue/orchestrator.py`, `backend/app/api/conversations.py`, and `backend/tests/integration/test_irreversible_actions.py` per Constitution IX/X and FR-025–FR-028/FR-052 (partial).
