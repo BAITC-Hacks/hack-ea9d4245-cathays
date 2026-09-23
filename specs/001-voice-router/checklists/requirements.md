@@ -32,6 +32,11 @@
 ## Notes
 
 - Validation iteration 1 passed on 2026-09-23.
+- Validation iteration 2 passed on 2026-09-23 after alignment with the authoritative dataset,
+  evaluator semantics, identification, action errors, and latency scoring contract.
+- Verified counts: 40 business scenarios, three system intents, 43 slots, 31 actions, nine
+  irreversible actions, six handoff queues, eight action errors, 104 utterances, and 13
+  multi-intent records.
 - The technology names mentioned in Scope Boundaries are explicit non-selections, not prescribed
   implementation choices.
 - No clarification markers remain; the specification is ready for planning.
