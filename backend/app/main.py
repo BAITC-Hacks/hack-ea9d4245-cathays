@@ -11,11 +11,13 @@ from .execution.actions import MockActions
 from .execution.state_machine import ConfirmationMachine
 from .tracing.service import trace
 from .grounding.responder import respond
+from .api.errors import install
 
 snapshot=load_snapshot(settings.dataset_path); validate(snapshot)
 router=RouterService(snapshot,OpenAICompatibleClient(settings.base_url,settings.api_key,settings.model),settings.policy_version)
 conversations=ConversationStore(); actions=MockActions(snapshot); executor=ScenarioExecutor(snapshot,actions,ConfirmationMachine(actions)); traces={}
 app=FastAPI(title="Voice Router",version="0.1.0")
+install(app)
 class TurnInput(BaseModel):
     text:str=""; input_mode:str="text"; client_turn_id:str; preview_id:str|None=None; confirmed:bool|None=None
 @app.get("/health")

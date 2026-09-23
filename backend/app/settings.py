@@ -1,6 +1,11 @@
 from dataclasses import dataclass
 from pathlib import Path
 import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+except ImportError:
+    pass
 
 ROOT = Path(__file__).resolve().parents[2]
 

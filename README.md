@@ -7,5 +7,5 @@
 3. Run `uvicorn app.main:app --app-dir backend --reload`.
 4. Run `npm install --prefix apps/web` then `npm run dev --prefix apps/web`.
 
-Run `python backend/run_evaluation.py` to create predictions and invoke the checked-in evaluator. The checked-in dataset is authoritative.
+Run `$env:PYTHONIOENCODING='utf-8'; python backend/run_evaluation.py` in PowerShell to create predictions and invoke the checked-in evaluator. The checked-in dataset is authoritative.
 Hackathon team repository for Cathays
