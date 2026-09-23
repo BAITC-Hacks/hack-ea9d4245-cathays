@@ -1,0 +1,2 @@
+import {useState} from "react";import {CustomerConversation} from "./features/customer/CustomerConversation";import {SupervisorTrace} from "./features/supervisor/SupervisorTrace";import {getTrace,Turn} from "./api/client";
+export default function App(){const [trace,setTrace]=useState<any>();const [reply,setReply]=useState("");async function turn(t:Turn){setReply(t.assistant_message);setTrace(await getTrace(t.conversation_id,t.turn_id))}return <main><CustomerConversation onTurn={turn}/><p aria-live="polite">{reply}</p><SupervisorTrace trace={trace}/></main>}

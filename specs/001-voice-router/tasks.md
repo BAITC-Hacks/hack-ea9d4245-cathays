@@ -22,12 +22,12 @@ description: "Dependency-ordered implementation tasks for Voice Router"
 
 **Purpose**: Establish the reproducible modular-monolith workspace and local developer workflow.
 
-- [ ] T001 Create the planned backend and web directory skeleton in `backend/app/`, `backend/tests/`, and `apps/web/src/`.
-- [ ] T002 Create the Python 3.12 FastAPI/Pydantic/pytest dependency and tool configuration in `backend/pyproject.toml`.
-- [ ] T003 [P] Create the React/TypeScript/Vite/Tailwind dependency and tool configuration in `apps/web/package.json`.
-- [ ] T004 [P] Add backend environment template and typed settings for provider, model, dataset path, and test date override in `backend/.env.example` and `backend/app/settings.py`.
-- [ ] T005 [P] Add root ignore rules for local environments, browser artifacts, provider credentials, and `artifacts/` in `.gitignore`.
-- [ ] T006 [P] Create reproducible API/web/evaluation commands and prerequisites in `README.md`.
+- [X] T001 Create the planned backend and web directory skeleton in `backend/app/`, `backend/tests/`, and `apps/web/src/`.
+- [X] T002 Create the Python 3.12 FastAPI/Pydantic/pytest dependency and tool configuration in `backend/pyproject.toml`.
+- [X] T003 [P] Create the React/TypeScript/Vite/Tailwind dependency and tool configuration in `apps/web/package.json`.
+- [X] T004 [P] Add backend environment template and typed settings for provider, model, dataset path, and test date override in `backend/.env.example` and `backend/app/settings.py`.
+- [X] T005 [P] Add root ignore rules for local environments, browser artifacts, provider credentials, and `artifacts/` in `.gitignore`.
+- [X] T006 [P] Create reproducible API/web/evaluation commands and prerequisites in `README.md`.
 
 ---
 
@@ -38,14 +38,14 @@ description: "Dependency-ordered implementation tasks for Voice Router"
 **⚠️ CRITICAL**: Complete this phase before beginning any user-story implementation.
 
 - [ ] T007 Create immutable Pydantic dataset models for scenario, slot, action, queue, knowledge, mock-backend, and snapshot metadata in `backend/app/dataset/models.py`.
-- [ ] T008 Implement dataset path resolution and immutable JSON loading from `voice_router_dataset/case_2/voice_router_dataset/` in `backend/app/dataset/repository.py`.
-- [ ] T009 Implement startup cross-file validation for SC01–SC40, all slot/action/boundary IDs, action errors, and handoff queues in `backend/app/dataset/validator.py`.
+- [X] T008 Implement dataset path resolution and immutable JSON loading from `voice_router_dataset/case_2/voice_router_dataset/` in `backend/app/dataset/repository.py`.
+- [X] T009 Implement startup cross-file validation for SC01–SC40, all slot/action/boundary IDs, action errors, and handoff queues in `backend/app/dataset/validator.py`.
 - [ ] T010 [P] Create shared runtime schemas for `RoutingResult`, selected/alternative intents, clarification, fallback, handoff, execution state, and public turn response in `backend/app/api/schemas.py`.
-- [ ] T011 [P] Create monotonic stage timers with `measured|skipped|failed` statuses and interpretable totals in `backend/app/tracing/timers.py`.
-- [ ] T012 [P] Create redaction helpers for display-safe phone, IIN, policy, claim, and email values in `backend/app/tracing/redaction.py`.
+- [X] T011 [P] Create monotonic stage timers with `measured|skipped|failed` statuses and interpretable totals in `backend/app/tracing/timers.py`.
+- [X] T012 [P] Create redaction helpers for display-safe phone, IIN, policy, claim, and email values in `backend/app/tracing/redaction.py`.
 - [ ] T013 Implement the in-memory conversation, trace, and evaluation-run stores with request/turn lookup support in `backend/app/tracing/store.py`.
 - [ ] T014 Implement FastAPI application factory, versioned router registration, startup dataset validation, health check, and structured error envelope in `backend/app/main.py` and `backend/app/api/errors.py`.
-- [ ] T015 [P] Add dataset schema/cross-reference tests asserting 40 scenarios, 43 slots, 31 actions, six queues, valid `use_instead`, and no unresolved references in `backend/tests/contract/test_dataset_validator.py`.
+- [X] T015 [P] Add dataset schema/cross-reference tests asserting 40 scenarios, 43 slots, 31 actions, six queues, valid `use_instead`, and no unresolved references in `backend/tests/contract/test_dataset_validator.py`.
 - [ ] T016 [P] Add timer/redaction/store unit tests in `backend/tests/unit/test_timers.py`, `backend/tests/unit/test_redaction.py`, and `backend/tests/unit/test_trace_store.py`.
 - [ ] T017 Add API application/startup/error-envelope contract tests in `backend/tests/contract/test_app_contract.py`.
 
@@ -309,3 +309,22 @@ Then sequence T055 → T056 → T057 → T058 → T059.
 - **Per-story tasks**: US1 16; US2 6; US3 7; US4 13; US5 9; US6 8; US7 11.
 - Every task uses the required checkbox, sequential ID, optional `[P]`, required story label in story phases, and an exact file path.
 - Independent test criteria are stated for every user-story phase; test tasks are explicitly included because the specification and Constitution require them.
+
+---
+
+## Phase 11: Convergence
+
+**Purpose**: Close implementation gaps found by convergence review after the initial partial implementation pass.
+
+- [ ] T093 CRITICAL Replace the provider's ad hoc JSON response path with strict provider-native schema support, one validation-error repair attempt, explicit unavailable-provider fallback classification, and tests in `backend/app/routing/provider_client.py`, `backend/app/routing/service.py`, and `backend/tests/integration/test_routing_failures.py` per Constitution II and FR-001/FR-011 (partial).
+- [ ] T094 CRITICAL Implement typed slot normalization, supported identifier lookup, declared mock action handlers, all eight `actions.json` error behaviors, and generated-ID collision checks in `backend/app/execution/slots.py`, `backend/app/execution/identity.py`, `backend/app/execution/actions.py`, and `backend/tests/contract/test_actions.py` per Constitution IX and FR-025/FR-048–FR-054 (missing).
+- [ ] T095 CRITICAL Implement the irreversible-action terminal state machine: preview-bound explicit affirmative confirmation, cancellation/ambiguous-answer rejection, action-result persistence, and idempotent duplicate handling in `backend/app/execution/state_machine.py` and `backend/tests/integration/test_irreversible_actions.py` per Constitution X and FR-027/FR-028 (missing).
+- [ ] T096 Add evidence-bounded response selection/composition and prevent route-ID placeholder replies from reaching customer output in `backend/app/grounding/responder.py`, `backend/app/dialogue/orchestrator.py`, and `backend/tests/unit/test_grounded_responder.py` per Constitution XI and FR-026/SC-020 (missing).
+- [ ] T097 Complete typed runtime/API schemas, application-factory/router separation, trace/evaluation stores, and the documented structured error envelope in `backend/app/api/schemas.py`, `backend/app/api/errors.py`, `backend/app/api/conversations.py`, `backend/app/tracing/store.py`, and `backend/tests/contract/test_app_contract.py` per plan technical context and FR-045 (partial).
+- [ ] T098 Expand dialogue state to retain turns, slot provenance, identity references, unresolved/suspended goal metadata, clarification attempts, resumption, and 10-exchange safe conclusion; trace these fields in `backend/app/dialogue/models.py`, `backend/app/dialogue/service.py`, and `backend/tests/integration/test_dialog_samples.py` per Constitution VI and FR-012–FR-018 (partial).
+- [ ] T099 Complete supervisor trace masking for phone/IIN/policy/claim/email, add active/suspended/action/configuration fields and every applicable measured/skipped/failed latency stage in `backend/app/tracing/redaction.py`, `backend/app/tracing/service.py`, and `backend/tests/contract/test_supervisor_trace.py` per Constitution VIII/XV and FR-034–FR-037/FR-043 (partial).
+- [ ] T100 Implement evaluator projection, product-router batch runs, artifact isolation, unmodified `evaluate.py` execution, configuration/snapshot evidence, language/type/confusion reports, and evaluation HTTP endpoints in `backend/app/evaluation/`, `backend/app/api/evaluations.py`, and `backend/tests/integration/test_evaluation_runner.py` per Constitution XIII and FR-038–FR-040/SC-001–SC-003 (missing).
+- [ ] T101 Add all documented scenario-boundary, RU/KK/mixed-language, system-intent, multi-intent, malformed-output, and conversation API tests in `backend/tests/routing/`, `backend/tests/integration/`, and `backend/tests/contract/` per FR-006–FR-024 and Constitution III–VII (missing).
+- [ ] T102 Implement STT/TTS provider ports, completed-recording audio turn endpoint, recoverable voice error behavior, stage timings, browser microphone/transcript/playback controls, and voice tests in `backend/app/voice/`, `backend/app/api/audio_turns.py`, `apps/web/src/features/customer/CustomerConversation.tsx`, and associated tests per FR-029–FR-035/SC-010–SC-011 (missing).
+- [ ] T103 Add the supervisor evaluation result client/view with language/type metrics, errors, alternatives and confusion groups in `apps/web/src/api/evaluations.ts`, `apps/web/src/features/supervisor/EvaluationResults.tsx`, and `apps/web/src/features/supervisor/EvaluationResults.spec.tsx` per FR-039 and User Story 7 (missing).
+- [ ] T104 Run the full backend and web suite, quickstart flow, evaluator, dialogue/action/voice evidence collection, and record outstanding production telemetry/cost governance gates in `scripts/validate-quickstart.ps1` and `artifacts/validation/README.md` per SC-004–SC-020 and plan: milestones (missing).
