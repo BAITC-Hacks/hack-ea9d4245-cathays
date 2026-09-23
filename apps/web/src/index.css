@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Segoe UI", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: #ffffff;
+  --color-card-foreground: #243c34;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #243c34;
+  --color-primary: #23654f;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #edf1e9;
+  --color-secondary-foreground: #325644;
+  --color-muted: #f3f4ef;
+  --color-muted-foreground: #7b857e;
+  --color-accent: #edf2e8;
+  --color-accent-foreground: #23654f;
+  --color-destructive: #b74736;
+  --color-border: #e6e9e1;
+  --color-input: #e0e5da;
+  --color-ring: #75a48b;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+:root { --background: #f8f9f6; --foreground: #243c34; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+@layer base {
+  * { @apply border-border; }
+  body { @apply m-0 bg-background font-sans text-foreground; }
+  button:not(:disabled), a { cursor: pointer; }
+  button, a, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid #629a78; outline-offset: 4px; }
+  ::selection { background: #dfecc4; color: #234d38; }
+}
+.brand-mark { display: flex; align-items: center; justify-content: center; gap: 3px; }
+.brand-mark i { display: block; width: 3px; border-radius: 4px; background: currentColor; }
+.brand-mark i:nth-child(1) { height: 12px; }
+.brand-mark i:nth-child(2) { height: 24px; }
+.brand-mark i:nth-child(3) { height: 18px; }
+.brand-mark i:nth-child(4) { height: 9px; }
+.dot-grid { background-image: radial-gradient(#56774b20 1px, transparent 1px); background-size: 15px 15px; }
+.intro-orbit { box-shadow: 0 0 0 16px #e8eddf75, 0 0 0 33px #f0f3e980; }
+.panel-shadow { box-shadow: 0 3px 16px #243c3403, 0 1px 3px #243c3403; }
+.message-in { animation: rise-in .28s ease-out both; }
+@keyframes rise-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+.thinking span { animation: thinking 1.3s ease-in-out infinite; }
+.thinking span:nth-child(2) { animation-delay: .18s; }
+.thinking span:nth-child(3) { animation-delay: .36s; }
+@keyframes thinking { 0%, 75%, 100% { opacity: .35; transform: translateY(0); } 35% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
