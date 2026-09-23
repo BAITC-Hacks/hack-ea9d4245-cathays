@@ -1,4 +1,4 @@
-import json, subprocess, sys
+import json, subprocess, sys, os
 from pathlib import Path
 from .projection import prediction_map
 from .reporting import mismatches
@@ -8,7 +8,7 @@ def run(router, output_dir: Path) -> dict:
     results={utterance["id"]:router.route(utterance["text"],{}) for utterance in router.snapshot.utterances}
     predictions=prediction_map(results); path=output_dir/"predictions.json"
     path.write_text(json.dumps(predictions,ensure_ascii=False),encoding="utf-8")
-    process=subprocess.run([sys.executable,str(router.snapshot.root/"evaluate.py"),str(path),str(router.snapshot.root/"dev_utterances.json")],capture_output=True,text=True)
+    process=subprocess.run([sys.executable,str(router.snapshot.root/"evaluate.py"),str(path),str(router.snapshot.root/"dev_utterances.json")],capture_output=True,text=True,encoding="utf-8",env={**os.environ,"PYTHONIOENCODING":"utf-8"})
     report={"predictions_path":str(path),"returncode":process.returncode,"stdout":process.stdout,"stderr":process.stderr,"catalog_version":router.snapshot.version,"errors":mismatches(router.snapshot.utterances,predictions,results)}
     (output_dir/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     return report

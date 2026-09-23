@@ -2,11 +2,12 @@
 import json, subprocess, sys, os
 from pathlib import Path
 from app.main import conversations, router
-root=Path(__file__).resolve().parents[1]; out=root/"artifacts"/"predictions.json"; out.parent.mkdir(exist_ok=True)
+from app.settings import ROOT
+root=ROOT; out=root/"artifacts"/"predictions.json"; out.parent.mkdir(exist_ok=True)
 preds={}
 for utterance in router.snapshot.utterances:
     result=router.route(utterance["text"],{})
     preds[utterance["id"]]=[x["id"] for x in result["selected"]]
 out.write_text(json.dumps(preds,ensure_ascii=False),encoding="utf-8")
 environment={**os.environ,"PYTHONIOENCODING":"utf-8"}
-subprocess.run([sys.executable,str(router.snapshot.root/"evaluate.py"),str(out),str(router.snapshot.root/"dev_utterances.json")],check=False,env=environment)
+subprocess.run([sys.executable,str(router.snapshot.root/"evaluate.py"),str(out),str(router.snapshot.root/"dev_utterances.json")],check=True,env=environment)

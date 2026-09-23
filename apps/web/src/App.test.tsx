@@ -40,7 +40,7 @@ describe("routing studio", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByText("How can I help with your policy?")).toBeInTheDocument();
     expect(screen.getByText("SC_TEST")).toBeInTheDocument();
-    expect(sendText).toHaveBeenCalledWith("conversation-1", "My insurance question", undefined);
+    expect(sendText).toHaveBeenCalledWith("conversation-1", "My insurance question", undefined, expect.any(String));
     expect(screen.getByRole("textbox")).toHaveValue("");
   });
   it("preserves the typed message and allows retry after a failed request", async () => {
